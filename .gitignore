@@ -1,3 +1,12 @@
+# SvelteKit
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
 # Logs
 logs
 *.log
