@@ -3,15 +3,16 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-
-export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (session) throw redirect(302, '/');
-	return {};
-};
+import { PUBLIC_REGISTRATION_ENABLED } from '$env/static/public';
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
+		if (PUBLIC_REGISTRATION_ENABLED !== 'true') {
+			return fail(423, {
+				message: 'Registration is currently disabled'
+			});
+		}
+
 		const formData = await request.formData();
 		const username = formData.get('username') as string;
 		const password = formData.get('password') as string;
@@ -51,8 +52,6 @@ export const actions: Actions = {
 					});
 				}
 			}
-
-			console.log(e);
 			return fail(500, {
 				message: 'An unknown error occurred'
 			});

@@ -8,7 +8,7 @@ export default {
 		extend: {
 			colors: {
 				primary: colors.orange,
-				secondary: colors.yellow
+				secondary: colors.blue
 			}
 		}
 	},

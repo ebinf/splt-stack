@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { PUBLIC_REGISTRATION_ENABLED } from '$env/static/public';
+	import { title } from '../../store';
+
+	title.set('Sign up');
 
 	export let form;
 </script>
